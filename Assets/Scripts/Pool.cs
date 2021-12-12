@@ -53,6 +53,8 @@ using UnityEngine;
         {
            var obj =  Instantiate(poolablePrefab);
            activePool.Add(obj.GetComponent<IPoolable>());
+           activePool.Last().ActivatePoolable();
+
         }
 
         public void RemoveElement()
@@ -69,4 +71,19 @@ using UnityEngine;
         }
 
 
+        public void AddElements(int quantity)
+        {
+            for (var i = 0; i < quantity; i++)
+            {
+                AddElement();
+            }
+        }
+
+        public void RemoveElements(int quantity)
+        {
+            for (var i = 0; i < quantity; i++)
+            {
+                RemoveElement();
+            }
+        }
     }
