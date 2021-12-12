@@ -7,14 +7,15 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-    public Text nValue, xValue, yValue, zValue;
+    public InputField xField, yField, zField;
+    public Text nValue;
     public Pool pool;
     public GameObject[] boundsObjects;
     public void Start()
     {
-        xValue.text = MoveRamdonly.RandomSpace.x.ToString();
-        yValue.text = MoveRamdonly.RandomSpace.y.ToString();
-        zValue.text = MoveRamdonly.RandomSpace.z.ToString();
+        xField.SetTextWithoutNotify(MoveRamdonly.RandomSpace.x.ToString());
+        yField.SetTextWithoutNotify(MoveRamdonly.RandomSpace.y.ToString());
+        zField.SetTextWithoutNotify(MoveRamdonly.RandomSpace.z.ToString());
         MoveRamdonly.DrawBounds(boundsObjects);
 
     }
@@ -23,7 +24,7 @@ public class UIController : MonoBehaviour
     {
         try
         {
-            MoveRamdonly.RandomSpace = new Vector3(float.Parse(xValue.text), float.Parse(yValue.text), float.Parse(zValue.text));
+            MoveRamdonly.RandomSpace = new Vector3(float.Parse(xField.text), float.Parse(yField.text), float.Parse(zField.text));
         }
         catch
         {
