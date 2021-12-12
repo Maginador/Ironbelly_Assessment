@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using Object = System.Object;
 using Random = UnityEngine.Random;
@@ -13,6 +14,7 @@ public class MoveRamdonly : MonoBehaviour
     public float speed;
     public static Vector3 RandomSpace = new Vector3(3, 3, 3);
 
+    public static UnityEvent SpaceUpdated = new UnityEvent(); 
     private Vector3 _target;
     private float _threashold = 0.1f;
 
@@ -20,7 +22,13 @@ public class MoveRamdonly : MonoBehaviour
     private void Awake()
     {
         _target = GetNewPosition();
+        SpaceUpdated.AddListener(SetNewTarget);
         
+    }
+
+    private void SetNewTarget()
+    {
+        _target = GetNewPosition();
     }
 
     public static Vector3 GetNewPosition()
@@ -67,7 +75,6 @@ public class MoveRamdonly : MonoBehaviour
         objects[5].transform.position = new Vector3(-RandomSpace.x, -RandomSpace.y, -RandomSpace.z);
         objects[6].transform.position = new Vector3(RandomSpace.x, -RandomSpace.y, RandomSpace.z);
         objects[7].transform.position = new Vector3(-RandomSpace.x, -RandomSpace.y, RandomSpace.z);
-
     }
 
 }

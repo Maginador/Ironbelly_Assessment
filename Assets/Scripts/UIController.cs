@@ -29,6 +29,7 @@ public class UIController : MonoBehaviour
         {
             Debug.LogError("Text Fields should only have numbers!!");
         }
+        MoveRamdonly.SpaceUpdated.Invoke();
         MoveRamdonly.DrawBounds(boundsObjects);
 
     }
