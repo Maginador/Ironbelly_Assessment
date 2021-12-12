@@ -10,14 +10,20 @@ public class FindNearestNeighbour : MonoBehaviour
     public static List<Vector3> NeighboursPosition = new List<Vector3>();
     
     public int index;
+    public bool isEnabled;
 
-
-    public void Awake()
+    public void OnEnable()
     {
+        isEnabled = true;
         index = ExistingNeighbours.Count;
         ExistingNeighbours.Add(this);
         NeighboursPosition.Add(this.transform.position);
-        Debug.Log(NeighboursPosition.Count);
+    }
+
+    public void OnDisable()
+    {
+        isEnabled = false;
+
     }
 
     void UpdatePosition()
@@ -36,7 +42,7 @@ public class FindNearestNeighbour : MonoBehaviour
         var lowestIndex = -1;
         for (var i = 0; i < NeighboursPosition.Count; i++)
         {
-            if (index == i)
+            if (index == i || ExistingNeighbours[i].isEnabled == false)
                 continue;
             
             var curDistance = Vector3.Distance(NeighboursPosition[i], transform.position);
@@ -47,7 +53,7 @@ public class FindNearestNeighbour : MonoBehaviour
             }
             
         }
-        return NeighboursPosition[lowestIndex];
+        return lowestIndex == -1 ? Vector3.zero : NeighboursPosition[lowestIndex];
     }
 
     public void Update()
