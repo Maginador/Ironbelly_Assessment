@@ -6,6 +6,7 @@ using UnityEngine;
 public class FindNearestNeighbour : MonoBehaviour
 {
 
+    public LineRenderer line;
     public static List<FindNearestNeighbour> ExistingNeighbours = new List<FindNearestNeighbour>();
     public static List<Vector3> NeighboursPosition = new List<Vector3>();
     
@@ -59,6 +60,7 @@ public class FindNearestNeighbour : MonoBehaviour
     public void Update()
     {
         UpdatePosition();
-        Debug.DrawLine(transform.position, FindNearest());
+        line.SetPosition(0,transform.position);
+        line.SetPosition(1,FindNearest());
     }
 }
